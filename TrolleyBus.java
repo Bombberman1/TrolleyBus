@@ -1,26 +1,27 @@
 package ua.lviv.iot.algo.part1.lab1.TrolleyBus;
 import lombok.*;
-
-import java.lang.reflect.Constructor;
-
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 
-public class TrolleyBus{
-    private int id;
+public class TrolleyBus extends Transport{
+    private int id = 100;
     private int routeNumber;
     private String currentStop;
     private double maxSpeed;
     private double currentSpeed;
     private int capacity;
     private int passengers;
-
-    public TrolleyBus(){
-        this.id = 100;
+    public void accelerate(int speed) {
+        if(speed < maxSpeed){
+            currentSpeed = speed;
+        }
+        else{
+            currentSpeed = maxSpeed;
+        }
     }
-
     private static TrolleyBus instance = new TrolleyBus();
     private static TrolleyBus getInstance() {
         return instance;
@@ -43,21 +44,14 @@ public class TrolleyBus{
         }
     }
 
-    public static void main(String[] args) {
-        TrolleyBus[] bus = new TrolleyBus[7];
-        bus[0] = new TrolleyBus(50, 13, "Lviv", 80, 0, 30, 10);
-        bus[1] = instance.getInstance();
-        bus[2] = new TrolleyBus();
-        for(int i = 0; i < 3; i++){
-            System.out.println(bus[i]);
+    /*public static void main(String[] args) {
+        TrolleyBus[] trolleyBuses = {
+        new TrolleyBus(50, 13, "Lviv", 80, 0, 30, 10),
+        instance.getInstance(),
+        instance.getInstance(),
+        new TrolleyBus()};
+        for(var trolleyBus : trolleyBuses ) {
+            System.out.println(trolleyBus);
         }
-        bus[0].start();
-        System.out.println(bus[0]);
-        bus[0].addPassenger();
-        System.out.println(bus[0]);
-        bus[0].removePassenger();
-        System.out.println(bus[0]);
-        bus[0].stop();
-        System.out.println(bus[0]);
-    }
+    }*/
 }
