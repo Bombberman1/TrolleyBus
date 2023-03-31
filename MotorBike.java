@@ -7,7 +7,7 @@ import lombok.*;
 @ToString(callSuper = true)
 
 public class MotorBike extends Transport {
-    public boolean hasMuffler = false;
+    private boolean hasMuffler = false;
     public MotorBike(int id, double maxSpeed, double currentSpeed, boolean hasMuffler){
         super(id, maxSpeed, currentSpeed);
         this.hasMuffler = hasMuffler;

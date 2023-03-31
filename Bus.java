@@ -7,7 +7,7 @@ import lombok.*;
 @ToString(callSuper = true)
 
 public class Bus extends Transport {
-    public int windows;
+    private int windows;
     public Bus(int id, double maxSpeed, double currentSpeed, int windows){
         super(id, maxSpeed, currentSpeed);
         this.windows = windows;

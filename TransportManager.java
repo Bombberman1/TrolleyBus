@@ -21,6 +21,9 @@ public class TransportManager {
         return list.stream().filter(temp -> temp.getCurrentSpeed() > 0).collect(Collectors.toCollection(LinkedList::new));
         //speed.forEach(temp -> System.out.println(temp));
     }
+    static LinkedList<TrolleyBus> findAllWithPassengers(){
+        return list.stream().filter(temp -> temp instanceof TrolleyBus).map(temp -> (TrolleyBus) temp).filter(temp -> temp.getPassengers() > 9).collect(Collectors.toCollection(LinkedList::new));
+    }
     public static void main(String[] args) {
         TrolleyBus trolleyBus = new TrolleyBus(50, 80, 0, 13, "Lviv", 30, 10);
         Car car = new Car(78, 4, 120, 30, 50, 600, 90);
@@ -45,5 +48,9 @@ public class TransportManager {
         System.out.println(findAllWithIdGreaterThan(60));
         System.out.print("\n");
         System.out.println(findAllWithCurrentSpeed());
+        //Transport transport1 = list.get(0);
+        //((TrolleyBus) transport1).stop();
+        System.out.print("\n");
+        System.out.println(findAllWithPassengers());
     }
 }

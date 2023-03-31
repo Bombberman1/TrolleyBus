@@ -6,10 +6,10 @@ import lombok.*;
 @ToString(callSuper = true)
 
 public class Car extends Transport{
-    public int doors;
-    public double trunkVolume;
-    public double maxWeight;
-    public double currentWeight;
+    private int doors;
+    private double trunkVolume;
+    private double maxWeight;
+    private double currentWeight;
     public Car(int id, double maxSpeed, double currentSpeed, int doors, double trunkVolume, double maxWeight, double currentWeight){
         super(id, maxSpeed, currentSpeed);
         this.doors = doors;
