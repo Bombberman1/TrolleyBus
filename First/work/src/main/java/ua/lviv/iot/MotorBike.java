@@ -1,16 +1,18 @@
-package ua.lviv.iot.algo.part1.lab1.TrolleyBus;
-import lombok.*;
+package ua.lviv.iot;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@ToString(callSuper = true)
-
-public class MotorBike extends Transport {
+public final class MotorBike extends AbstractTransport {
     private boolean hasMuffler = false;
-    public MotorBike(int id, double maxSpeed, double currentSpeed, boolean hasMuffler){
-        super(id, maxSpeed, currentSpeed);
+    public MotorBike(final int identifier, final double maxSpeed,
+                     final double currentSpeed, final boolean hasMuffler) {
+        super(identifier, maxSpeed, currentSpeed);
         this.hasMuffler = hasMuffler;
     }
-    public void accelerate(int speed){currentSpeed = speed;}
+    public void accelerate(final int speed) {
+        setCurrentSpeed(getMaxSpeed());
+    }
 }

@@ -1,15 +1,15 @@
-package ua.lviv.iot.algo.part1.lab1.TrolleyBus;
-import lombok.*;
+package ua.lviv.iot;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-
-public abstract class Transport{
-    public int id;
-    public double maxSpeed;
-    public double currentSpeed;
-
+public abstract class AbstractTransport {
+    private int identifier;
+    private double maxSpeed;
+    private double currentSpeed;
     public abstract void accelerate(int speed);
 }

@@ -1,30 +1,50 @@
-package ua.lviv.iot.algo.part1.lab1.TrolleyBus;
-import lombok.*;
-
+package ua.lviv.iot;
+import lombok.Getter;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-@ToString
-
-public class TransportManager {
-    static LinkedList<Transport> list = new LinkedList<Transport>();
-    static void addTransport(final Transport temp){
+@Getter
+public final class TransportManager {
+    private final LinkedList<AbstractTransport> list = new LinkedList<>();
+    public void addTransport(final AbstractTransport temp) {
         list.add(temp);
     }
-    static LinkedList<Transport> findAllWithIdGreaterThan(int x){
-        return list.stream().filter(temp -> temp.getId() > x).collect(Collectors.toCollection(LinkedList::new));
+    public LinkedList<AbstractTransport>
+    findAllWithIdGreaterThan(final int number) {
+        return list.stream()
+                    .filter(temp -> temp.getIdentifier() > number)
+                    .collect(Collectors.toCollection(LinkedList::new));
         //toCollection(LinkedList::new));
         //greater.forEach(temp -> System.out.println(temp));
     }
-    static LinkedList<Transport> findAllWithCurrentSpeed(){
-        return list.stream().filter(temp -> temp.getCurrentSpeed() > 0).collect(Collectors.toCollection(LinkedList::new));
+    public LinkedList<AbstractTransport> findAllWithCurrentSpeed() {
+        return list.stream()
+                    .filter(temp -> temp.getCurrentSpeed() > 0)
+                    .collect(Collectors.toCollection(LinkedList::new));
         //speed.forEach(temp -> System.out.println(temp));
     }
-    static LinkedList<TrolleyBus> findAllWithPassengers(){
-        return list.stream().filter(temp -> temp instanceof TrolleyBus).map(temp -> (TrolleyBus) temp).filter(temp -> temp.getPassengers() > 9).collect(Collectors.toCollection(LinkedList::new));
+    public LinkedList<TrolleyBus> findAllTrolleyBusWithPassengers() {
+        return list.stream()
+                    .filter(temp -> temp instanceof TrolleyBus)
+                    .map(temp -> (TrolleyBus) temp)
+                    .filter(temp -> temp.getPassengers() > 0)
+                    .collect(Collectors.toCollection(LinkedList::new));
     }
-    public static void main(String[] args) {
+    public LinkedList<Integer> findAllCarWithDoors() {
+        return list.stream()
+                    .filter(object -> object instanceof Car)
+                    .map(mapper -> ((Car) mapper).getDoors())
+                    .filter(temp -> temp > 0)
+                    .collect(Collectors.toCollection(LinkedList::new));
+    }
+    public LinkedList<Boolean> findMotorBikeWithMuffler() {
+        return list.stream()
+                    .filter(object -> object instanceof MotorBike)
+                    .map(object -> ((MotorBike) object).isHasMuffler())
+                    .filter(object -> object)
+                    .collect(Collectors.toCollection(LinkedList::new));
+    }
+    /*public static void main(String[] args) {
+        TransportManager manager = new TransportManager();
         TrolleyBus trolleyBus = new TrolleyBus(50, 80, 0, 13, "Lviv", 30, 10);
         Car car = new Car(78, 4, 120, 30, 50, 600, 90);
         Car car2 = new Car(21, 2, 80, 0, 20, 400, 120);
@@ -33,24 +53,26 @@ public class TransportManager {
         Bus bus2 = new Bus();
         MotorBike motorBike = new MotorBike(90, 130, 15, true);
         MotorBike motorBike2 = new MotorBike();
-        addTransport(trolleyBus);
-        addTransport(car);
-        for(var object : list) {
-            System.out.println(object);
+        manager.addTransport(trolleyBus);
+        manager.addTransport(car);
+        for(var object : manager.list) {
+            //System.out.println(object);
         }
         System.out.print("\n");
-        addTransport(car2);
-        addTransport(trolleyBus2);
-        addTransport(bus);
-        addTransport(bus2);
-        addTransport(motorBike);
-        addTransport(motorBike2);
-        System.out.println(findAllWithIdGreaterThan(60));
+        manager.addTransport(car2);
+        manager.addTransport(trolleyBus2);
+        manager.addTransport(bus);
+        manager.addTransport(bus2);
+        manager.addTransport(motorBike);
+        manager.addTransport(motorBike2);
+        System.out.println(manager.findAllWithIdGreaterThan(60));
         System.out.print("\n");
-        System.out.println(findAllWithCurrentSpeed());
-        //Transport transport1 = list.get(0);
-        //((TrolleyBus) transport1).stop();
+        System.out.println(manager.findAllWithCurrentSpeed());
         System.out.print("\n");
-        System.out.println(findAllWithPassengers());
-    }
+        System.out.println(manager.findAllTrolleyBusWithPassengers());
+        System.out.print("\n");
+        System.out.println(manager.findAllCarWithDoors());
+        System.out.print("\n");
+        System.out.println(manager.findMotorBikeWithMuffler());
+    }*/
 }
