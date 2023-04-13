@@ -1,18 +1,21 @@
 package ua.lviv.iot;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.opencsv.CSVWriter;
+import org.junit.jupiter.api.*;
 
 import java.io.File;
-import java.util.Collections;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class WriterTest {
     public Writer writer;
     public LinkedList<AbstractTransport> trans;
+    public Comparator<AbstractTransport> comparator1;
+    public Comparator<AbstractTransport> comparator2;
     @BeforeEach
     public void data() {
         writer = new Writer();
@@ -37,25 +40,35 @@ public class WriterTest {
         trans.add(motorBike2);
         trans.add(trolleyBus3);
         trans.add(trolleyBus4);
+        comparator1 = new CompareClass();
+        comparator2 = new CompareClass2();
     }
     @Test
+    @Order(1)
     public void writeToFileEmptyTest() {
         LinkedList<AbstractTransport> listok = new LinkedList<>();
-        Exception exception1 = Assertions.assertThrows(Exception.class, () -> writer.writeToFile(listok));
+        Exception exception1 = Assertions.assertThrows(Exception.class, () -> writer.writeToFile(listok, comparator2));
         Assertions.assertEquals("List is empty", exception1.getMessage());
     }
     @Test
-    public void writeToFileExistTest() {
-        Exception exception2 = Assertions.assertThrows(Exception.class, () -> writer.writeToFile(trans));
-        Assertions.assertEquals("CSV already exists", exception2.getMessage());
+    @Order(2)
+    public void writeToFileExistTest() throws FileNotFoundException {
+        if((new Scanner(new File("C:\\Users\\sasad\\IdeaProjects\\First\\separated.csv")).hasNext())) {
+            Exception exception2 = Assertions.assertThrows(Exception.class, () -> writer.writeToFile(trans, comparator2));
+            Assertions.assertEquals("CSV already exists", exception2.getMessage());
+        }
+        else {
+            Assertions.assertFalse((new Scanner(new File("C:\\Users\\sasad\\IdeaProjects\\First\\separated.csv")).hasNext()));
+        }
     }
     @Test
-    public void writeToFileCSVTest() throws Exception {
+    @Order(3)
+    public void writeToFileCSVTestOld() throws Exception {
+        CSVWriter csv = new CSVWriter(new FileWriter("C:\\Users\\sasad\\IdeaProjects\\First\\separated.csv"));
+        writer.writeToFile(trans, comparator1);
         Scanner scanner = new Scanner(new File("C:\\Users\\sasad\\IdeaProjects\\First\\separated.csv"));
         LinkedList<String> expect = new LinkedList<>();
         LinkedList<String> actual = new LinkedList<>();
-        Comparator<AbstractTransport> comparator = new CompareClass();
-        Collections.sort(trans, comparator);
         AbstractTransport last = trans.getLast();
         for (AbstractTransport object : trans) {
             String rawName = "";
@@ -90,7 +103,23 @@ public class WriterTest {
         while (scanner.hasNext()) {
             actual.add(scanner.next());
         }
-        writer.writeToFile(trans);
+        Assertions.assertEquals(expect, actual);
+    }
+    @Test
+    @Order(4)
+    public void writeToFileCSVTestNew() throws Exception {
+        CSVWriter csv = new CSVWriter(new FileWriter("C:\\Users\\sasad\\IdeaProjects\\First\\separated.csv"));
+        writer.writeToFile(trans, comparator2);
+        Scanner scanner1 = new Scanner(new File("C:\\Users\\sasad\\IdeaProjects\\First\\expectingFile.csv"));
+        Scanner scanner2 = new Scanner(new File("C:\\Users\\sasad\\IdeaProjects\\First\\separated.csv"));
+        LinkedList<String> expect = new LinkedList<>();
+        LinkedList<String> actual = new LinkedList<>();
+        while (scanner1.hasNext()) {
+            expect.add(scanner1.next());
+        }
+        while (scanner2.hasNext()) {
+            actual.add(scanner2.next());
+        }
         Assertions.assertEquals(expect, actual);
     }
 }

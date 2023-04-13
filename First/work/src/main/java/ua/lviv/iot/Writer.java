@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Writer {
-    public void writeToFile(LinkedList<AbstractTransport> transports) throws Exception {
+    public void writeToFile(LinkedList<AbstractTransport> transports, Comparator<AbstractTransport> comparator) throws Exception {
             Scanner scanner = new Scanner(new File("C:\\Users\\sasad\\IdeaProjects\\First\\separated.csv"));
             CSVWriter object;
             if (transports.isEmpty()) {
@@ -21,7 +21,6 @@ public class Writer {
                 throw new Exception("CSV already exists");
             } else {
                 scanner.close();
-                Comparator<AbstractTransport> comparator = new CompareClass();
                 Collections.sort(transports, comparator);
                 object = new CSVWriter(new FileWriter("C:\\Users\\sasad\\IdeaProjects\\First\\separated.csv"));
                 AbstractTransport last = transports.getLast();
