@@ -13,8 +13,18 @@ public final class Bus extends AbstractTransport {
 <span class="fc" id="L13">        super(identifier, maxSpeed, currentSpeed);</span>
 <span class="fc" id="L14">        this.windows = windows;</span>
 <span class="fc" id="L15">    }</span>
+    @Override
+    public String[] getHeaders() {
+<span class="fc" id="L18">        return new String[]{super.getHeaders()[0],</span>
+<span class="fc" id="L19">                super.getHeaders()[1], super.getHeaders()[2], &quot;windows&quot;};</span>
+    }
+    @Override
+    public String[] toCSV() {
+<span class="fc" id="L23">        return new String[]{super.toCSV()[0], super.toCSV()[1],</span>
+<span class="fc" id="L24">                super.toCSV()[2], String.valueOf(windows)};</span>
+    }
     public void accelerate(final int speed) {
-<span class="fc" id="L17">        setCurrentSpeed(getMaxSpeed());</span>
-<span class="fc" id="L18">    }</span>
+<span class="fc" id="L27">        setCurrentSpeed(getMaxSpeed());</span>
+<span class="fc" id="L28">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

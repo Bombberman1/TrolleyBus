@@ -1,7 +1,10 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-work,ua.lviv.iot,Car,0,54,0,0,0,14,0,11,0,11
+work,ua.lviv.iot,Car,0,142,0,0,0,20,0,13,0,13
 work,ua.lviv.iot,TransportManager,2,134,2,6,0,25,2,21,0,19
-work,ua.lviv.iot,Bus,0,24,0,0,0,8,0,5,0,5
-work,ua.lviv.iot,MotorBike,0,30,0,0,0,8,0,5,0,5
-work,ua.lviv.iot,TrolleyBus,0,98,0,6,0,26,0,18,0,15
-work,ua.lviv.iot,AbstractTransport,0,36,0,0,0,6,0,8,0,8
+work,ua.lviv.iot,Bus,0,82,0,0,0,12,0,7,0,7
+work,ua.lviv.iot,MotorBike,0,88,0,0,0,12,0,7,0,7
+work,ua.lviv.iot,TrolleyBus,0,186,0,6,0,32,0,20,0,17
+work,ua.lviv.iot,Writer,0,90,0,8,0,23,0,6,0,2
+work,ua.lviv.iot,AbstractTransport,0,72,0,0,0,9,0,10,0,10
+work,ua.lviv.iot,CompareClass,0,38,2,16,0,8,2,9,0,2
+work,ua.lviv.iot,CompareClass2,0,11,0,0,0,3,0,2,0,2

@@ -5,6 +5,7 @@
 "78","4.0","120.0","30","50.0","600.0","90.0"
 "21","2.0","80.0","0","20.0","400.0","120.0"
 "identifier","maxSpeed","currentSpeed","hasMuffler"
+"92","80.0","60.0","true"
 "90","130.0","15.0","true"
 "0","0.0","0.0","false"
 "identifier","maxSpeed","currentSpeed","routeNumber","currentStop","capacity","passengers"

@@ -22,11 +22,16 @@ public final class TrolleyBus extends AbstractTransport {
     }
     @Override
     public String[] getHeaders() {
-        return new String[]{super.getHeaders()[0], super.getHeaders()[1], super.getHeaders()[2], "routeNumber", "currentStop", "capacity", "passengers"};
+        return new String[]{super.getHeaders()[0], super.getHeaders()[1],
+                super.getHeaders()[2], "routeNumber",
+                "currentStop", "capacity", "passengers"};
     }
     @Override
     public String[] toCSV() {
-        return new String[]{super.toCSV()[0], super.toCSV()[1], super.toCSV()[2], String.valueOf(routeNumber), String.valueOf(currentStop), String.valueOf(capacity), String.valueOf(passengers)};
+        return new String[]{super.toCSV()[0], super.toCSV()[1],
+                super.toCSV()[2], String.valueOf(routeNumber),
+                String.valueOf(currentStop),
+                String.valueOf(capacity), String.valueOf(passengers)};
     }
     public void accelerate(final int speed) {
         if (speed < getMaxSpeed()) {

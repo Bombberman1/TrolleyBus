@@ -20,9 +20,22 @@ public final class Car extends AbstractTransport {
 <span class="fc" id="L20">        this.maxWeight = maxWeight;</span>
 <span class="fc" id="L21">        this.currentWeight = currentWeight;</span>
 <span class="fc" id="L22">    }</span>
+    @Override
+    public String[] getHeaders() {
+<span class="fc" id="L25">        return new String[]{super.getHeaders()[0],</span>
+<span class="fc" id="L26">                super.getHeaders()[1], super.getHeaders()[2], &quot;doors&quot;,</span>
+                &quot;trunkVolume&quot;, &quot;maxWeight&quot;, &quot;currentWeight&quot;};
+    }
+    @Override
+    public String[] toCSV() {
+<span class="fc" id="L31">        return new String[]{super.toCSV()[0],</span>
+<span class="fc" id="L32">                super.toCSV()[1], super.toCSV()[2],</span>
+<span class="fc" id="L33">                String.valueOf(doors), String.valueOf(trunkVolume),</span>
+<span class="fc" id="L34">                String.valueOf(maxWeight), String.valueOf(currentWeight)};</span>
+    }
     public void accelerate(final int speed) {
-<span class="fc" id="L24">        setCurrentSpeed(getMaxSpeed());</span>
-<span class="fc" id="L25">    }</span>
+<span class="fc" id="L37">        setCurrentSpeed(getMaxSpeed());</span>
+<span class="fc" id="L38">    }</span>
     /*@Override
     public String toString(){
         return String.format(&quot;%s %s %s %s %s %s %s&quot;, id, doors,

@@ -22,11 +22,16 @@ public final class Car extends AbstractTransport {
     }
     @Override
     public String[] getHeaders() {
-        return new String[]{super.getHeaders()[0], super.getHeaders()[1], super.getHeaders()[2], "doors", "trunkVolume", "maxWeight", "currentWeight"};
+        return new String[]{super.getHeaders()[0],
+                super.getHeaders()[1], super.getHeaders()[2], "doors",
+                "trunkVolume", "maxWeight", "currentWeight"};
     }
     @Override
     public String[] toCSV() {
-        return new String[]{super.toCSV()[0], super.toCSV()[1], super.toCSV()[2], String.valueOf(doors), String.valueOf(trunkVolume), String.valueOf(maxWeight), String.valueOf(currentWeight)};
+        return new String[]{super.toCSV()[0],
+                super.toCSV()[1], super.toCSV()[2],
+                String.valueOf(doors), String.valueOf(trunkVolume),
+                String.valueOf(maxWeight), String.valueOf(currentWeight)};
     }
     public void accelerate(final int speed) {
         setCurrentSpeed(getMaxSpeed());

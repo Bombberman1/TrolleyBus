@@ -15,11 +15,13 @@ public final class Bus extends AbstractTransport {
     }
     @Override
     public String[] getHeaders() {
-        return new String[]{super.getHeaders()[0], super.getHeaders()[1], super.getHeaders()[2], "windows"};
+        return new String[]{super.getHeaders()[0],
+                super.getHeaders()[1], super.getHeaders()[2], "windows"};
     }
     @Override
     public String[] toCSV() {
-        return new String[]{super.toCSV()[0], super.toCSV()[1], super.toCSV()[2], String.valueOf(windows)};
+        return new String[]{super.toCSV()[0], super.toCSV()[1],
+                super.toCSV()[2], String.valueOf(windows)};
     }
     public void accelerate(final int speed) {
         setCurrentSpeed(getMaxSpeed());

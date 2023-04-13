@@ -2,16 +2,24 @@ package ua.lviv.iot;
 
 import com.opencsv.CSVWriter;
 
-import java.io.File;
-import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class Writer {
-    public void writeToFile(LinkedList<AbstractTransport> transports, Comparator<AbstractTransport> comparator) throws Exception {
-            Scanner scanner = new Scanner(new File("C:\\Users\\sasad\\IdeaProjects\\First\\separated.csv"));
+public final class Writer {
+    public void writeToFile(final LinkedList<AbstractTransport> transports,
+                            final Comparator<AbstractTransport> comparator)
+            throws Exception {
+        final Path path = Paths.get("..\\separated.csv");
+        Scanner scanner = new Scanner(new InputStreamReader(
+                Files.newInputStream(path), StandardCharsets.UTF_8));
             CSVWriter object;
             if (transports.isEmpty()) {
                 scanner.close();
@@ -22,7 +30,8 @@ public class Writer {
             } else {
                 scanner.close();
                 Collections.sort(transports, comparator);
-                object = new CSVWriter(new FileWriter("C:\\Users\\sasad\\IdeaProjects\\First\\separated.csv"));
+                object = new CSVWriter(new OutputStreamWriter(
+                        Files.newOutputStream(path), StandardCharsets.UTF_8));
                 AbstractTransport last = transports.getLast();
                 for (AbstractTransport temp : transports) {
                     if (last.getClass() != temp.getClass()) {

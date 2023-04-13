@@ -15,7 +15,8 @@ public abstract class AbstractTransport {
         return new String[]{"identifier", "maxSpeed", "currentSpeed"};
     }
     public String[] toCSV() {
-        return new String[]{String.valueOf(identifier), String.valueOf(maxSpeed), String.valueOf(currentSpeed)};
+        return new String[]{String.valueOf(identifier),
+                String.valueOf(maxSpeed), String.valueOf(currentSpeed)};
     }
     public abstract void accelerate(int speed);
 }

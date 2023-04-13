@@ -1,10 +1,14 @@
 package ua.lviv.iot;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
-public class CompareClass2 implements Comparator<AbstractTransport> {
+public final class CompareClass2 implements
+        Comparator<AbstractTransport>, Serializable {
     @Override
-    public int compare(AbstractTransport o1, AbstractTransport o2) {
-        return o1.getClass().getName().compareTo(o2.getClass().getName());
+    public int compare(final AbstractTransport object1,
+                       final AbstractTransport object2) {
+        return object1.getClass().getName()
+                .compareTo(object2.getClass().getName());
     }
 }

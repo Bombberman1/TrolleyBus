@@ -1,6 +1,9 @@
 ua\lviv\iot\TransportManager.class
 ua\lviv\iot\MotorBike.class
-ua\lviv\iot\TrolleyBus.class
 ua\lviv\iot\Car.class
-ua\lviv\iot\AbstractTransport.class
+ua\lviv\iot\Writer.class
 ua\lviv\iot\Bus.class
+ua\lviv\iot\CompareClass.class
+ua\lviv\iot\TrolleyBus.class
+ua\lviv\iot\AbstractTransport.class
+ua\lviv\iot\CompareClass2.class

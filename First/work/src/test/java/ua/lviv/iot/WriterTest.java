@@ -29,9 +29,11 @@ public class WriterTest {
         MotorBike motorBike2 = new MotorBike();
         TrolleyBus trolleyBus3 = new TrolleyBus(140, 90, 40, 52, "Odesa", 30, 10);
         TrolleyBus trolleyBus4 = new TrolleyBus(20, 85, 0, 81, "Kharkiv", 20, 7);
+        MotorBike motorBike3 = new MotorBike(92, 80, 60, true);
         trans = new LinkedList<>();
         trans.add(trolleyBus);
         trans.add(trolleyBus2);
+        trans.add(motorBike3);
         trans.add(car);
         trans.add(car2);
         trans.add(bus);
@@ -53,20 +55,20 @@ public class WriterTest {
     @Test
     @Order(2)
     public void writeToFileExistTest() throws FileNotFoundException {
-        if((new Scanner(new File("C:\\Users\\sasad\\IdeaProjects\\First\\separated.csv")).hasNext())) {
+        if((new Scanner(new File("..\\separated.csv")).hasNext())) {
             Exception exception2 = Assertions.assertThrows(Exception.class, () -> writer.writeToFile(trans, comparator2));
             Assertions.assertEquals("CSV already exists", exception2.getMessage());
         }
         else {
-            Assertions.assertFalse((new Scanner(new File("C:\\Users\\sasad\\IdeaProjects\\First\\separated.csv")).hasNext()));
+            Assertions.assertFalse((new Scanner(new File("..\\separated.csv")).hasNext()));
         }
     }
     @Test
     @Order(3)
     public void writeToFileCSVTestOld() throws Exception {
-        CSVWriter csv = new CSVWriter(new FileWriter("C:\\Users\\sasad\\IdeaProjects\\First\\separated.csv"));
+        CSVWriter csv = new CSVWriter(new FileWriter("..\\separated.csv"));
         writer.writeToFile(trans, comparator1);
-        Scanner scanner = new Scanner(new File("C:\\Users\\sasad\\IdeaProjects\\First\\separated.csv"));
+        Scanner scanner = new Scanner(new File("..\\separated.csv"));
         LinkedList<String> expect = new LinkedList<>();
         LinkedList<String> actual = new LinkedList<>();
         AbstractTransport last = trans.getLast();
@@ -108,10 +110,10 @@ public class WriterTest {
     @Test
     @Order(4)
     public void writeToFileCSVTestNew() throws Exception {
-        CSVWriter csv = new CSVWriter(new FileWriter("C:\\Users\\sasad\\IdeaProjects\\First\\separated.csv"));
+        CSVWriter csv = new CSVWriter(new FileWriter("..\\separated.csv"));
         writer.writeToFile(trans, comparator2);
-        Scanner scanner1 = new Scanner(new File("C:\\Users\\sasad\\IdeaProjects\\First\\expectingFile.csv"));
-        Scanner scanner2 = new Scanner(new File("C:\\Users\\sasad\\IdeaProjects\\First\\separated.csv"));
+        Scanner scanner1 = new Scanner(new File("..\\expectingFile.csv"));
+        Scanner scanner2 = new Scanner(new File("..\\separated.csv"));
         LinkedList<String> expect = new LinkedList<>();
         LinkedList<String> actual = new LinkedList<>();
         while (scanner1.hasNext()) {

@@ -11,6 +11,13 @@ public abstract class AbstractTransport {
 <span class="fc" id="L11">    private int identifier;</span>
 <span class="fc" id="L12">    private double maxSpeed;</span>
 <span class="fc" id="L13">    private double currentSpeed;</span>
+    public String[] getHeaders() {
+<span class="fc" id="L15">        return new String[]{&quot;identifier&quot;, &quot;maxSpeed&quot;, &quot;currentSpeed&quot;};</span>
+    }
+    public String[] toCSV() {
+<span class="fc" id="L18">        return new String[]{String.valueOf(identifier),</span>
+<span class="fc" id="L19">                String.valueOf(maxSpeed), String.valueOf(currentSpeed)};</span>
+    }
     public abstract void accelerate(int speed);
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
