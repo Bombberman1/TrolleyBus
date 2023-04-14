@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Setter
 @NoArgsConstructor
+@SuppressWarnings("PMD.ShortClassName")
 
 public final class Bus extends AbstractTransport {
     private int windows;

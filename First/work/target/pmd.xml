@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd" version="6.53.0" timestamp="2023-04-14T02:38:19.273">
-<file name="C:\Users\sasad\IdeaProjects\First\work\src\main\java\ua\lviv\iot\Bus.java">
-<violation beginline="9" endline="29" begincolumn="14" endcolumn="1" rule="ShortClassName" ruleset="Code Style" package="ua.lviv.iot" class="Bus" externalInfoUrl="https://pmd.github.io/pmd-6.53.0/pmd_rules_java_codestyle.html#shortclassname" priority="4">
-Avoid short class names like Bus
-</violation>
-</file>
-<file name="C:\Users\sasad\IdeaProjects\First\work\src\main\java\ua\lviv\iot\Car.java">
-<violation beginline="8" endline="44" begincolumn="14" endcolumn="1" rule="ShortClassName" ruleset="Code Style" package="ua.lviv.iot" class="Car" externalInfoUrl="https://pmd.github.io/pmd-6.53.0/pmd_rules_java_codestyle.html#shortclassname" priority="4">
-Avoid short class names like Car
-</violation>
-</file>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd" version="6.53.0" timestamp="2023-04-14T23:03:38.313">
+<suppressedviolation filename="C:\Users\sasad\IdeaProjects\First\work\src\main\java\ua\lviv\iot\Bus.java" suppressiontype="annotation" msg="Avoid short class names like Bus" usermsg=""></suppressedviolation>
+<suppressedviolation filename="C:\Users\sasad\IdeaProjects\First\work\src\main\java\ua\lviv\iot\Car.java" suppressiontype="annotation" msg="Avoid short class names like Car" usermsg=""></suppressedviolation>
 </pmd>

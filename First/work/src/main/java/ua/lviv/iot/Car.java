@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Setter
 @NoArgsConstructor
+@SuppressWarnings("PMD.ShortClassName")
 public final class Car extends AbstractTransport {
     private int doors;
     private double trunkVolume;
