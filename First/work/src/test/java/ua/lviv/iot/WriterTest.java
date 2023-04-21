@@ -1,12 +1,9 @@
 package ua.lviv.iot;
 
-import com.opencsv.CSVWriter;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.util.Comparator;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -14,8 +11,6 @@ import java.util.Scanner;
 public class WriterTest {
     public Writer writer;
     public LinkedList<AbstractTransport> trans;
-    public Comparator<AbstractTransport> comparator1;
-    public Comparator<AbstractTransport> comparator2;
     @BeforeEach
     public void data() {
         writer = new Writer();
@@ -42,35 +37,15 @@ public class WriterTest {
         trans.add(motorBike2);
         trans.add(trolleyBus3);
         trans.add(trolleyBus4);
-        comparator1 = new CompareClass();
-        comparator2 = new CompareClass2();
     }
     @Test
     @Order(1)
-    public void writeToFileEmptyTest() {
-        LinkedList<AbstractTransport> listok = new LinkedList<>();
-        Exception exception1 = Assertions.assertThrows(Exception.class, () -> writer.writeToFile(listok, comparator2));
-        Assertions.assertEquals("List is empty", exception1.getMessage());
-    }
-    @Test
-    @Order(2)
-    public void writeToFileExistTest() throws FileNotFoundException {
-        if((new Scanner(new File("..\\separated.csv")).hasNext())) {
-            Exception exception2 = Assertions.assertThrows(Exception.class, () -> writer.writeToFile(trans, comparator2));
-            Assertions.assertEquals("CSV already exists", exception2.getMessage());
-        }
-        else {
-            Assertions.assertFalse((new Scanner(new File("..\\separated.csv")).hasNext()));
-        }
-    }
-    @Test
-    @Order(3)
-    public void writeToFileCSVTestOld() throws Exception {
-        CSVWriter csv = new CSVWriter(new FileWriter("..\\separated.csv"));
-        writer.writeToFile(trans, comparator1);
+    public void writeToFileCSVTestOld() throws IOException {
+        writer.writeToFile(trans);
         Scanner scanner = new Scanner(new File("..\\separated.csv"));
         LinkedList<String> expect = new LinkedList<>();
         LinkedList<String> actual = new LinkedList<>();
+        trans.sort(new CompareObjectListUtils());
         AbstractTransport last = trans.getLast();
         for (AbstractTransport object : trans) {
             String rawName = "";
@@ -86,21 +61,33 @@ public class WriterTest {
                     }
                 }
                 last = object;
-            }
-            else return;
-            first = true;
-            String rawValue = "";
-            for (String temp : object.toCSV()) {
-                if (first) {
-                    rawValue = "\"" + temp + "\"";
-                    first = false;
+                expect.add(rawName);
+                first = true;
+                String rawValue = "";
+                for (String temp : object.toCSV()) {
+                    if (first) {
+                        rawValue = "\"" + temp + "\"";
+                        first = false;
+                    }
+                    else {
+                        rawValue += ",\"" + temp + "\"";
+                    }
                 }
-                else {
-                    rawValue += ",\"" + temp + "\"";
-                }
+                expect.add(rawValue);
             }
-            expect.add(rawName);
-            expect.add(rawValue);
+            else {
+                String rawValue = "";
+                for (String temp : object.toCSV()) {
+                    if (first) {
+                        rawValue = "\"" + temp + "\"";
+                        first = false;
+                    }
+                    else {
+                        rawValue += ",\"" + temp + "\"";
+                    }
+                }
+                expect.add(rawValue);
+            }
         }
         while (scanner.hasNext()) {
             actual.add(scanner.next());
@@ -108,10 +95,9 @@ public class WriterTest {
         Assertions.assertEquals(expect, actual);
     }
     @Test
-    @Order(4)
-    public void writeToFileCSVTestNew() throws Exception {
-        CSVWriter csv = new CSVWriter(new FileWriter("..\\separated.csv"));
-        writer.writeToFile(trans, comparator2);
+    @Order(2)
+    public void writeToFileCSVTestNew() throws IOException {
+        writer.writeToFile(trans);
         Scanner scanner1 = new Scanner(new File("..\\expectingFile.csv"));
         Scanner scanner2 = new Scanner(new File("..\\separated.csv"));
         LinkedList<String> expect = new LinkedList<>();
