@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.29">
+<file name="C:\Users\sasad\IdeaProjects\BusRest\src\main\java\ua\lviv\iot\busrest\BusRestApplication.java">
+<error line="9" column="29" severity="error" message="Parameter args should be final." source="com.puppycrawl.tools.checkstyle.checks.FinalParametersCheck"/>
+</file>
+<file name="C:\Users\sasad\IdeaProjects\BusRest\src\main\java\ua\lviv\iot\busrest\controller\TransportController.java">
+</file>
+<file name="C:\Users\sasad\IdeaProjects\BusRest\src\main\java\ua\lviv\iot\busrest\manager\TransportManager.java">
+</file>
+<file name="C:\Users\sasad\IdeaProjects\BusRest\src\main\java\ua\lviv\iot\busrest\models\AbstractTransport.java">
+</file>
+<file name="C:\Users\sasad\IdeaProjects\BusRest\src\main\java\ua\lviv\iot\busrest\models\Bus.java">
+</file>
+<file name="C:\Users\sasad\IdeaProjects\BusRest\src\main\java\ua\lviv\iot\busrest\models\Car.java">
+</file>
+<file name="C:\Users\sasad\IdeaProjects\BusRest\src\main\java\ua\lviv\iot\busrest\models\MotorBike.java">
+</file>
+<file name="C:\Users\sasad\IdeaProjects\BusRest\src\main\java\ua\lviv\iot\busrest\models\TrolleyBus.java">
+</file>
+<file name="C:\Users\sasad\IdeaProjects\BusRest\src\main\java\ua\lviv\iot\busrest\service\TransportService.java">
+</file>
+<file name="C:\Users\sasad\IdeaProjects\BusRest\src\main\java\ua\lviv\iot\busrest\writer\CompareObjectListUtils.java">
+</file>
+<file name="C:\Users\sasad\IdeaProjects\BusRest\src\main\java\ua\lviv\iot\busrest\writer\Writer.java">
+</file>
+<file name="C:\Users\sasad\IdeaProjects\BusRest\src\main\resources\application.properties">
+</file>
+</checkstyle>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TransportManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BusRest</a> &gt; <a href="index.source.html" class="el_package">ua.lviv.iot.BusRest.manager</a> &gt; <span class="el_source">TransportManager.java</span></div><h1>TransportManager.java</h1><pre class="source lang-java linenums">package ua.lviv.iot.BusRest.manager;
+import lombok.Getter;
+import ua.lviv.iot.BusRest.models.AbstractTransport;
+import ua.lviv.iot.BusRest.models.Car;
+import ua.lviv.iot.BusRest.models.MotorBike;
+import ua.lviv.iot.BusRest.models.TrolleyBus;
+
+import java.util.LinkedList;
+import java.util.stream.Collectors;
+@Getter
+<span class="fc" id="L11">public final class TransportManager {</span>
+<span class="fc" id="L12">    private final LinkedList&lt;AbstractTransport&gt; list = new LinkedList&lt;&gt;();</span>
+    public void addTransport(final AbstractTransport temp) {
+<span class="fc" id="L14">        list.add(temp);</span>
+<span class="fc" id="L15">    }</span>
+    public LinkedList&lt;AbstractTransport&gt;
+    findAllWithIdGreaterThan(final int number) {
+<span class="fc" id="L18">        return list.stream()</span>
+<span class="fc bfc" id="L19" title="All 2 branches covered.">                    .filter(temp -&gt; temp.getIdentifier() &gt; number)</span>
+<span class="fc" id="L20">                    .collect(Collectors.toCollection(LinkedList::new));</span>
+        //toCollection(LinkedList::new));
+        //greater.forEach(temp -&gt; System.out.println(temp));
+    }
+    public LinkedList&lt;AbstractTransport&gt; findAllWithCurrentSpeed() {
+<span class="fc" id="L25">        return list.stream()</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">                    .filter(temp -&gt; temp.getCurrentSpeed() &gt; 0)</span>
+<span class="fc" id="L27">                    .collect(Collectors.toCollection(LinkedList::new));</span>
+        //speed.forEach(temp -&gt; System.out.println(temp));
+    }
+    public LinkedList&lt;TrolleyBus&gt; findAllTrolleyBusWithPassengers() {
+<span class="fc" id="L31">        return list.stream()</span>
+<span class="fc" id="L32">                    .filter(temp -&gt; temp instanceof TrolleyBus)</span>
+<span class="fc" id="L33">                    .map(temp -&gt; (TrolleyBus) temp)</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">                    .filter(temp -&gt; temp.getPassengers() &gt; 0)</span>
+<span class="fc" id="L35">                    .collect(Collectors.toCollection(LinkedList::new));</span>
+    }
+    public LinkedList&lt;Integer&gt; findAllCarWithDoors() {
+<span class="fc" id="L38">        return list.stream()</span>
+<span class="fc" id="L39">                    .filter(object -&gt; object instanceof Car)</span>
+<span class="fc" id="L40">                    .map(mapper -&gt; ((Car) mapper).getDoors())</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">                    .filter(temp -&gt; temp &gt; 0)</span>
+<span class="fc" id="L42">                    .collect(Collectors.toCollection(LinkedList::new));</span>
+    }
+    public LinkedList&lt;Boolean&gt; findMotorBikeWithMuffler() {
+<span class="fc" id="L45">        return list.stream()</span>
+<span class="fc" id="L46">                    .filter(object -&gt; object instanceof MotorBike)</span>
+<span class="fc" id="L47">                    .map(object -&gt; ((MotorBike) object).isHasMuffler())</span>
+<span class="fc" id="L48">                    .filter(object -&gt; object)</span>
+<span class="fc" id="L49">                    .collect(Collectors.toCollection(LinkedList::new));</span>
+    }
+    /*public static void main(String[] args) {
+        TransportManager manager = new TransportManager();
+        TrolleyBus trolleyBus = new TrolleyBus(50, 80, 0, 13, &quot;Lviv&quot;, 30, 10);
+        Car car = new Car(78, 4, 120, 30, 50, 600, 90);
+        Car car2 = new Car(21, 2, 80, 0, 20, 400, 120);
+        TrolleyBus trolleyBus2 = new TrolleyBus(47, 90, 40, 39, &quot;Kyiv&quot;, 30, 20);
+        Bus bus = new Bus(140, 12, 80, 20);
+        Bus bus2 = new Bus();
+        MotorBike motorBike = new MotorBike(90, 130, 15, true);
+        MotorBike motorBike2 = new MotorBike();
+        manager.addTransport(trolleyBus);
+        manager.addTransport(car);
+        for(var object : manager.list) {
+            //System.out.println(object);
+        }
+        System.out.print(&quot;\n&quot;);
+        manager.addTransport(car2);
+        manager.addTransport(trolleyBus2);
+        manager.addTransport(bus);
+        manager.addTransport(bus2);
+        manager.addTransport(motorBike);
+        manager.addTransport(motorBike2);
+        System.out.println(manager.findAllWithIdGreaterThan(60));
+        System.out.print(&quot;\n&quot;);
+        System.out.println(manager.findAllWithCurrentSpeed());
+        System.out.print(&quot;\n&quot;);
+        System.out.println(manager.findAllTrolleyBusWithPassengers());
+        System.out.print(&quot;\n&quot;);
+        System.out.println(manager.findAllCarWithDoors());
+        System.out.print(&quot;\n&quot;);
+        System.out.println(manager.findMotorBikeWithMuffler());
+    }*/
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
