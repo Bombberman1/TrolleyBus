@@ -3,8 +3,6 @@ package ua.lviv.iot.busrest.service;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ua.lviv.iot.busrest.models.AbstractTransport;
 
@@ -28,14 +26,9 @@ public final class TransportService {
         return new LinkedList<>(transport.values());
     }
 
-    public ResponseEntity<AbstractTransport>
+    public AbstractTransport
     getTransportById(final Integer transportId) {
-        if (transport.get(transportId) != null) {
-            return new ResponseEntity<>(
-                    transport.get(transportId), HttpStatus.OK);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        return transport.get(transportId);
     }
 
     public AbstractTransport createTransport(
@@ -45,22 +38,20 @@ public final class TransportService {
         return abstractTransport;
     }
 
-    public ResponseEntity<AbstractTransport> deleteTransportById(
+    public AbstractTransport deleteTransportById(
             final Integer transportId) {
-        return transport.remove(transportId) == null
-                ? ResponseEntity.status(HttpStatus.NOT_FOUND).build()
-                : ResponseEntity.status(HttpStatus.OK).build();
+        return transport.remove(transportId);
     }
 
-    public ResponseEntity<AbstractTransport> updateTransportById(
+    public AbstractTransport updateTransportById(
             final Integer transportId,
             final AbstractTransport abstractTransport) {
-        if (transport.get(transportId) != null) {
             abstractTransport.setRestId(transportId);
-            transport.put(transportId, abstractTransport);
-            return ResponseEntity.status(HttpStatus.OK).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+            if (transport.get(transportId) != null) {
+                transport.put(transportId, abstractTransport);
+                return transport.get(transportId);
+            } else {
+                return null;
+            }
     }
 }

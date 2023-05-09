@@ -1,5 +1,7 @@
 package ua.lviv.iot.busrest.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +19,8 @@ import java.util.LinkedList;
 @RequestMapping("/transport")
 @RestController
 public final class TransportController {
-    private final TransportService transportService = new TransportService();
+    @Autowired
+    private TransportService transportService;
 
     @GetMapping
     public LinkedList<AbstractTransport> get() {
@@ -27,7 +30,12 @@ public final class TransportController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<AbstractTransport> getById(
             @PathVariable("id") final Integer transportId) {
-        return transportService.getTransportById(transportId);
+        if (transportService.getTransportById(transportId) != null) {
+            return new ResponseEntity<>(
+                    transportService.getTransportById(transportId), HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @PostMapping
@@ -39,15 +47,22 @@ public final class TransportController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<AbstractTransport>
     delete(@PathVariable("id") final Integer transportId) {
-        return transportService.deleteTransportById(transportId);
+        return transportService.deleteTransportById(transportId) == null
+                ? ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+                : ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<AbstractTransport>
     update(@PathVariable("id") final Integer transportId,
            @RequestBody final AbstractTransport abstractTransport) {
-        return transportService.updateTransportById(
-                transportId, abstractTransport);
+        if (transportService.updateTransportById(transportId,
+                abstractTransport) != null) {
+            return new ResponseEntity<>(
+                    transportService.getTransportById(transportId), HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
 }
