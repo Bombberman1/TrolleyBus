@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: ua.lviv.iot.TransportTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s - in ua.lviv.iot.TransportTest

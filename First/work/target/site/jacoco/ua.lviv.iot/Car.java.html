@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Car.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">work</a> &gt; <a href="index.source.html" class="el_package">ua.lviv.iot</a> &gt; <span class="el_source">Car.java</span></div><h1>Car.java</h1><pre class="source lang-java linenums">package ua.lviv.iot;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+@Getter
+<span class="fc" id="L6">@Setter</span>
+<span class="fc" id="L7">@NoArgsConstructor</span>
+@SuppressWarnings(&quot;PMD.ShortClassName&quot;)
+public final class Car extends AbstractTransport {
+<span class="fc" id="L10">    private int doors;</span>
+<span class="fc" id="L11">    private double trunkVolume;</span>
+<span class="fc" id="L12">    private double maxWeight;</span>
+<span class="fc" id="L13">    private double currentWeight;</span>
+    public Car(final int identifier,
+               final double maxSpeed, final double currentSpeed,
+               final int doors, final double trunkVolume,
+               final double maxWeight, final double currentWeight) {
+<span class="fc" id="L18">        super(identifier, maxSpeed, currentSpeed);</span>
+<span class="fc" id="L19">        this.doors = doors;</span>
+<span class="fc" id="L20">        this.trunkVolume = trunkVolume;</span>
+<span class="fc" id="L21">        this.maxWeight = maxWeight;</span>
+<span class="fc" id="L22">        this.currentWeight = currentWeight;</span>
+<span class="fc" id="L23">    }</span>
+    @Override
+    public String[] getHeaders() {
+<span class="fc" id="L26">        return new String[]{super.getHeaders()[0],</span>
+<span class="fc" id="L27">                super.getHeaders()[1], super.getHeaders()[2], &quot;doors&quot;,</span>
+                &quot;trunkVolume&quot;, &quot;maxWeight&quot;, &quot;currentWeight&quot;};
+    }
+    @Override
+    public String[] toCSV() {
+<span class="fc" id="L32">        return new String[]{super.toCSV()[0],</span>
+<span class="fc" id="L33">                super.toCSV()[1], super.toCSV()[2],</span>
+<span class="fc" id="L34">                String.valueOf(doors), String.valueOf(trunkVolume),</span>
+<span class="fc" id="L35">                String.valueOf(maxWeight), String.valueOf(currentWeight)};</span>
+    }
+    public void accelerate(final int speed) {
+<span class="fc" id="L38">        setCurrentSpeed(getMaxSpeed());</span>
+<span class="fc" id="L39">    }</span>
+    /*@Override
+    public String toString(){
+        return String.format(&quot;%s %s %s %s %s %s %s&quot;, id, doors,
+        maxSpeed, currentSpeed, trunkVolume, maxWeight, currentWeight);
+    }*/
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
